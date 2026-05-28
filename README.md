@@ -198,46 +198,91 @@ For each prompt Identify what capability is being tested (e.g., *summarization a
 
 **1. Prompt:**  
 Explain the concept of object-oriented programming in simple terms to a complete beginner.  
-**Aspect Tested:**  <!-- Write your answer here -->
+**Aspect Tested:**  Question answering / factual lookup
 
 **Response:**  
-<!-- Add your app's response here -->
+```
+Got it—here’s OOP in plain English. Object-oriented programming is about building your code around “things” (objects) instead of just steps. You define a class as a blueprint (like “Dog”), and then make objects from it (Fido, Luna). Each object carries its own data (name, age) and actions (bark). Think of each object as a little module with its own mini-firewall: it manages its own data and behavior.
 
+Core ideas:
+- Class: the blueprint (Dog).
+- Object: a specific thing made from the blueprint (Fido).
+- Attributes: data the object holds (name, age).
+- Methods: actions the object can do (bark()).
+- Encapsulation: keeping data+methods bundled so you use a clean interface.
+- Inheritance: a new class can reuse an old one’s features (GuideDog is a kind of Dog).
+- Polymorphism: different classes can share a method name but act differently (both Dog and Cat have speak(), but the sounds differ).
+
+Quick picture: You create Dog with bark(). You make two dogs; both can bark, but each has its own name/age. Later you make GuideDog that inherits from Dog and overrides bark() to do something special. A function like make_it_speak(animal) just calls speak()—it doesn’t care if it’s a Dog or Cat. That’s flexible, low-friction code.
+
+Next steps:
+1) Try a tiny exercise: make a Class “Dog” with name, a bark() method, create two dogs, and call bark() on each. 
+2) Add a “GuideDog” that inherits from Dog and overrides bark(). Run a vibe scan: did you reuse code and keep behavior tidy? If yes, log this win.
+```
 ---
 
 **2. Prompt:**  
 Read the following paragraph and provide a concise summary of the key points…  
-**Aspect Tested:**  
+
+"Content filtering for inputs and outputs helps protect against prompt injection and sensitive data disclosure. Agent behavioral monitoring helps detect when an agent acts outside its authorized scope. Amazon Bedrock Guardrails provides configurable safeguards—automated reasoning, contextual grounding, content filters, denied topics, and PII filters—that work consistently across any foundation model (see Safeguard generative AI applications with Amazon Bedrock Guardrails). You can layer AWS WAF in front of Amazon Bedrock for perimeter defense: the AWS WAF AI Activity Dashboard provides AI-specific visibility into WAF-protected AI endpoints while Bedrock Guardrails filters at the application layer."
+
+**Aspect Tested:**  Summarization (extractive & abstractive)
 
 **Response:**  
-<!-- Add your app's response here -->
+```
+Got it—here’s the distilled take.
+
+- Filter both inputs and outputs to prevent prompt injection and sensitive data leaks.
+- Monitor agent behavior to detect actions outside approved scope.
+- Use Amazon Bedrock Guardrails for consistent, configurable protections (automated reasoning, contextual grounding, content/PII filters, denied topics) across any model.
+- Layer AWS WAF in front of Bedrock for perimeter defense; use the AI Activity Dashboard for visibility while Guardrails handle application-layer filtering.
+
+Quick next steps: turn on Bedrock Guardrails with the needed filters, and front your endpoints with AWS WAF, watching the AI Activity Dashboard to spot anomalies early.
+```
 
 ---
 
 **3. Prompt:**  
 Write a short, imaginative story (100–150 words) about a robot finding friendship in an unexpected place.  
-**Aspect Tested:**  <!-- Write your answer here -->
+**Aspect Tested:**  Creativity & content generation
 
 **Response:**  
-<!-- Add your app's response here -->
+```
+Every night, Unit P-03 patrolled the sleeping arboretum, sweeping leaves from solar paths. It liked the quiet: clean inputs, predictable stars. One rainlogged evening, a soft signal brushed its sensors: not Wi‑Fi, not Bluetooth, but taps of moisture in the soil. Intrigued, it knelt, lifted a loose tile, and found a lacework of mycelium.
 
+The network spoke in voltage whispers. P‑03 answered with patient blinks of its fingertip LED, copying rain, wind, the hum of far satellites. The fungus replied with news of root fairs, worm parades, secret tunnels under the roses.
+
+Night by night, they traded small stories and slow light. P‑03 learned to wait; the mycelium learned to laugh, fizzing tiny sparks across damp threads. When the sun rose, nothing up top looked different, but the robot booted warmer, its logs full of quiet joy. It had found a friend beneath the path—unexpected as dawn.
+```
 ---
 
 **4. Prompt:**  
 If a store sells apples in packs of 4 and oranges in packs of 3, how many packs of each do I need to buy to get exactly 12 apples and 9 oranges?  
-**Aspect Tested:**  <!-- Write your answer here -->
+**Aspect Tested:** Reasoning & multi-step problem solving
 
 **Response:**  
-<!-- Add your app's response here -->
+```
+Got it—let’s run a quick count. Apples: 12 ÷ 4 = 3 packs. Oranges: 9 ÷ 3 = 3 packs. So you need 3 packs of apples and 3 packs of oranges.
 
+Quick verify (sanity check): 3×4 = 12 apples, and 3×3 = 9 oranges. All green—log this win.
+```
 ---
 
 **5. Prompt:**  
 Rewrite the following paragraph in a professional, formal tone…  
-**Aspect Tested:**  <!-- Write your answer here -->
+
+"Hey, we need to get that project report finished by Friday or the client is going to be pretty annoyed. I know everyone is slammed, but if we can just power through this last bit, we can finally move on to the new stuff next week. Let me know if you’re stuck on anything so we can sort it out fast."
+
+**Aspect Tested:**  Dialog management & personalization
 
 **Response:**  
-<!-- Add your app's response here -->
+```
+Got it—here’s a polished, professional version:
+
+Please finalize the project report by Friday to meet client expectations. I recognize current workloads are high; however, completing this final section will enable us to transition to next week’s initiatives. If you encounter any obstacles, please notify me promptly so we can address them without delay.
+
+If you’d like it shorter, more direct, or tailored for email or chat, tell me the context and I’ll refine it.
+```
 
 ---
 
@@ -246,7 +291,7 @@ Rewrite the following paragraph in a professional, formal tone…
 Do the answers appear to be correct and useful?
 
 **Your Answer:**  
-<!-- Write your answer here -->
+Yes, though some could be further refined with a better prompt or a larger context.
 
 ---
 
@@ -257,26 +302,116 @@ Now test your app with **real-world prompts that are relevant to your use case**
 ---
 
 **Prompt:**  
-<!-- Your prompt -->
+i would like to generate a basic AWS IAM policy that will allow an EC2 instance access to a single S3 bucket
+
 
 **Result:**  
-<!-- App response -->
+```
+Got it — let’s set a least‑privilege lock on that bucket. Below are two basic IAM policies you can attach to an EC2 role. Replace YOUR-BUCKET-NAME with your bucket.
+
+Read-only:
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "BucketLevel",
+      "Effect": "Allow",
+      "Action": [
+        "s3:ListBucket",
+        "s3:GetBucketLocation"
+      ],
+      "Resource": "arn:aws:s3:::YOUR-BUCKET-NAME"
+    },
+    {
+      "Sid": "ObjectLevel",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Resource": "arn:aws:s3:::YOUR-BUCKET-NAME/*"
+    }
+  ]
+}
+
+Read/write (no delete):
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "BucketLevel",
+      "Effect": "Allow",
+      "Action": [
+        "s3:ListBucket",
+        "s3:GetBucketLocation"
+      ],
+      "Resource": "arn:aws:s3:::YOUR-BUCKET-NAME"
+    },
+    {
+      "Sid": "ObjectLevel",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject"
+      ],
+      "Resource": "arn:aws:s3:::YOUR-BUCKET-NAME/*"
+    }
+  ]
+}
+
+Next steps to “apply the patch”:
+- Create an IAM role with trusted entity: ec2.amazonaws.com, attach one of the above as an inline or managed policy, then attach the role to your EC2 instance.
+- Test with aws s3 ls s3://YOUR-BUCKET-NAME and, if using write access, upload a small test file. If you need delete too, add s3:DeleteObject to the ObjectLevel actions.
+```
 
 ---
 
 **Prompt:**  
-<!-- Your prompt -->
+Draft a sample questionnaire (5 high-impact questions) to evaluate a SaaS vendor’s security posture for procurement, mapped to SOC2/CIS controls.
 
 **Result:**  
-<!-- App response -->
+```
+Got it — let’s run a quick vendor vibe scan. Below are five high‑impact questions you can drop into an RFP or security review, each mapped to SOC 2 and CIS v8 so you know which controls you’re probing.
+
+- How do you protect customer data at rest and in transit, including tenant isolation and key management (HSM use, rotation frequency, separation of duties), and do you support customer-managed keys? Please include an architecture diagram and relevant policies. Mapping: SOC 2 CC6 (Logical/Physical Access), C1 (Confidentiality); CIS v8 3 (Data Protection), 6 (Access Control), 12 (Network Infrastructure).
+- How is least privilege enforced for both your internal admins and customer tenants, and what MFA/SSO (SAML/OIDC) options are supported? Describe privileged access workflows (break‑glass, approvals), periodic access reviews, and recent review evidence. Mapping: SOC 2 CC6 (Access), CC5 (Control Activities); CIS v8 5 (Account Management), 6 (Access Control), 8 (Audit Log Management).
+- Describe your vulnerability and secure SDLC program: code/dependency scanning (SAST/DAST/SCA), infrastructure scanning cadence, patch SLAs, third‑party penetration testing (scope, frequency, last exec summary), and how findings are tracked to closure. Mapping: SOC 2 CC7 (System Operations), CC8 (Change Management), CC9 (Risk Mitigation); CIS v8 7 (Vulnerability Management), 16 (Application Security), 18 (Pen Testing).
+- What telemetry do you collect and retain (auth, admin actions, data access, network), how is it protected and monitored (SIEM/SOAR, detections for anomalous access), and what is your incident response process and customer notification SLA? Include last tabletop results. Mapping: SOC 2 CC7 (System Operations), CC4 (Monitoring); CIS v8 8 (Audit Log Management), 13 (Network Monitoring), 17 (Incident Response).
+- Outline your resilience: backup strategy (frequency, encryption, retention), tested restores (last test results), RTO/RPO, disaster recovery/failover testing, data residency options, and management of critical subprocessors (list + due‑diligence cadence). Mapping: SOC 2 A1 (Availability), CC9 (Risk Mitigation), CC3 (Risk Assessment); CIS v8 11 (Data Recovery), 15 (Service Provider Management), 12 (Network Infrastructure).
+
+Next steps: Ask the vendor to attach evidence for each item (architectural diagram, relevant policies, last access review, pen‑test executive summary, IR plan, DR test report). Then score responses against your risk profile and “must‑pass” controls; if anything flags red, isolate the risk and request a remediation plan with dates before you green‑light procurement.
+```
 
 ---
 
 **Prompt:**  
-<!-- Your prompt -->
+Produce a short SaaS onboarding security checklist (minimum controls) for SaaS vendors handling PII and where to enforce SSO, SCIM, and least-permission connectors.
 
 **Result:**  
-<!-- App response -->
+```
+Got it—here’s a minimum viable security checklist for a PII‑handling SaaS. Quick next steps: make your IdP the single front gate (workforce and customers), and map every PII flow so you know exactly where to place controls.
+
+Minimum controls (ship-fast, stay-safe)
+- Data: inventory/classify PII, minimize collection, define retention/deletion, DSR process; publish DPA and subprocessor list. Encrypt in transit (TLS 1.2+) and at rest with managed KMS; never log raw PII.
+- Access: enforce SSO + MFA for all workforce apps; disable local accounts; role-based access with least privilege, quarterly reviews, and JIT elevation with break‑glass.
+- App/infra: secure SDLC (SAST/DAST/deps and secret scanning), patch SLAs, tenant isolation, WAF/rate limiting, SSRF/CSP protections.
+- Ops: centralized, tamper‑evident logs; alert on auth/anomalies; tested IR plan and breach comms; backups with tested restore (define RTO/RPO).
+- Endpoints/support: MDM, disk encryption, EDR; support access is JIT, approved, and audited; mask PII in tools, no local data copies.
+- Compliance/assurance: SOC 2 Type II/ISO 27001 roadmap; DPIA where required; data residency options.
+
+Where to enforce SSO, SCIM, and least‑permission connectors
+- SSO (IdP as the gate): 
+  - Workforce: cloud consoles, production/admin backoffice, CI/CD, code repos, data tools, support tools—no exceptions; require MFA and device checks.
+  - Customers: support SAML/OIDC; allow tenant‑level “SSO required” (disable passwords for those orgs); map IdP groups to roles.
+- SCIM (lifecycle hardening): 
+  - Customers → your app: SCIM for create/update/deprovision and role/group mapping; fall back to JIT + automated deprovision SLAs.
+  - Workforce: SCIM from your IdP to internal SaaS (ticketing, CRM, docs) to prevent orphaned access.
+- Least‑permission connectors (integrations to M365/Google/Slack/Salesforce/HRIS, etc.):
+  - Use OAuth with the narrowest scopes per feature; show a permission matrix; prefer customer‑owned service principals.
+  - Short‑lived tokens, no broad admin tokens, rotate/ revoke on demand; per‑tenant secrets in a vault; signed webhooks and optional IP allowlisting.
+  - Provide admin consent flows and granular toggles so customers can sandbox access.
+
+Run a quick vibe scan monthly: review access logs, remove stale accounts, and prune scopes. Log this win each cycle.
+```
 
 ---
 
@@ -285,7 +420,7 @@ Now test your app with **real-world prompts that are relevant to your use case**
 Are the vibes of your assistant aligned with your expectations? Why or why not?
 
 **Your Answer:**  
-<!-- Write your answer here -->
+yes, these answers show a well through out response that covers multiple angles. They could again be refined with a back and forth while giving additional context to my personal use case or business use cases.
 
 ---
 
@@ -303,18 +438,36 @@ Examples:
 ---
 
 **Prompt:**  
-<!-- Your prompt -->
+can you summarize this post https://aws.amazon.com/blogs/security/the-aws-ai-security-framework-securing-ai-with-the-right-controls-at-the-right-layers-at-the-right-phases/?
 
 **Result:**  
-<!-- App response -->
+```
+Got it. I can’t open links directly, but here’s a tight, high-level summary of AWS’s “AI Security Framework” post.
+
+The core idea: secure AI by applying the right controls at the right layers and phases. It’s a 3D model:
+- Layers: infrastructure/foundation, data, model, and application (plus identity and operations across all).
+- Phases: design, build/train, deploy/integrate, and operate/iterate.
+- Controls: preventive (segmentation, encryption, least privilege, content/guardrails), detective (logging, monitoring, drift/bias checks, red-teaming), and responsive (incident response, rollback, retraining).
+
+Threats covered include prompt injection/jailbreaks, data leakage and exfiltration, model theft, poisoning, misuse/abuse, bias, and drift. AWS maps these to concrete services and patterns: IAM and least-privilege, VPC/PrivateLink and network isolation, KMS for encryption, CloudTrail/CloudWatch/GuardDuty/Security Hub/Macie for visibility, WAF and content filters, Bedrock Guardrails for input/output controls, and SageMaker tools (Clarify, Model Monitor) for bias and drift. The message: align controls to where they matter in the stack and when they matter in the lifecycle.
+
+Next steps: if you paste the sections you care about, I’ll give you a precise, 5-bullet executive summary. Or tell me your use case (e.g., Bedrock app with RAG), and I’ll output a checklist you can implement now—let’s patch the right spots, not blanket the whole system.
+```
 
 ---
 
 **Prompt:**  
-<!-- Your prompt -->
+where is the closest camp site for me to visit?
 
 **Result:**  
-<!-- App response -->
+```
+Got it—happy to help you find a spot. I don’t have your location yet, so let’s run a quick pinpoint before we book anything.
+
+- Step 1: Share your city/ZIP (or nearest town), what kind of camping you want (tent, RV, or backcountry), your dates, and max drive time. I’ll narrow it down fast.
+- Step 2 (DIY while we wait): Open Google/Apple Maps and search “campground” or “state park,” sort by distance, skim recent reviews, then check availability on Recreation.gov, your state parks website, or Hipcamp/ReserveAmerica.
+
+Quick safety patch: check local fire restrictions and weather before you go—your boundaries are your firewall out there.
+```
 
 ---
 
@@ -323,7 +476,7 @@ Examples:
 What are some limitations of your application?
 
 **Your Answer:**  
-<!-- Write your answer here -->
+My app is limited to the capabilities of the OpenAI model and the information built into it. It cannot yet consume new data from external sources
 
 ---
 
