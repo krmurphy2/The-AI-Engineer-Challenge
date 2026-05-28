@@ -1,0 +1,37 @@
+# Files excluded from the Vercel deployment upload.
+# Vercel does NOT honor .gitignore for uploads, so corporate / local-only
+# artifacts must be listed here explicitly.
+
+# uv.lock is generated locally against our private JFrog mirror, which the
+# Vercel build server cannot authenticate to. Let Vercel resolve dependencies
+# fresh from public PyPI using pyproject.toml.
+uv.lock
+
+# Local virtualenvs, caches, and IDE droppings — never useful in a deploy.
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node build artifacts (Vercel rebuilds these)
+node_modules/
+.next/
+
+# Local secrets / scratch
+.env
+.env.local
+.env.*.local
+*.key
+temp-openai.key
+
+# Dev container config — not needed at runtime
+.devcontainer/
+
+# Editor / VCS bits
+.git/
+.vscode/
+.idea/
+.cursor/
+.windsurf/
