@@ -7,6 +7,12 @@
 # fresh from public PyPI using pyproject.toml.
 uv.lock
 
+# Same story for the npm lockfile: it pins 100+ `resolved` URLs to
+# sstp.jfrog.io, which Vercel can't authenticate to. Excluding it forces
+# `npm install` on the build server to resolve from public registry.npmjs.org
+# using package.json alone.
+frontend/package-lock.json
+
 # Local virtualenvs, caches, and IDE droppings — never useful in a deploy.
 .venv/
 __pycache__/
